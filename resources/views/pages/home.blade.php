@@ -95,20 +95,25 @@
         </div>
     </section>
 
-    {{-- Stats Section --}}
-    <section class="bg-petra-dark py-16">
+{{-- Stats Section --}}
+    <section id="stats-section" class="bg-petra-dark py-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-center text-petra-gold font-semibold text-xs uppercase tracking-widest mb-10">Petra dalam Angka</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 @foreach([
-                    ['7.000+', 'Mahasiswa Aktif'],
-                    ['150+', 'Mitra Internasional'],
-                    ['430+', 'Mitra Nasional'],
-                    ['52.860', 'Alumni Global'],
+                    [7000, '+', 'Mahasiswa Aktif'],
+                    [150, '+', 'Mitra Internasional'],
+                    [430, '+', 'Mitra Nasional'],
+                    [52860, '', 'Alumni Global'],
                 ] as $stat)
                 <div>
-                    <p class="font-display font-bold text-3xl md:text-4xl text-white">{{ $stat[0] }}</p>
-                    <p class="text-gray-400 text-sm mt-1">{{ $stat[1] }}</p>
+                    {{-- Tambahkan class counter-angka dan atribut data-target --}}
+                    <p class="font-display font-bold text-3xl md:text-4xl text-white counter-angka" 
+                       data-target="{{ $stat[0] }}" 
+                       data-suffix="{{ $stat[1] }}">
+                        0{{ $stat[1] }}
+                    </p>
+                    <p class="text-gray-400 text-sm mt-1">{{ $stat[2] }}</p>
                 </div>
                 @endforeach
             </div>
@@ -140,17 +145,18 @@
         </div>
     </section>
 
-    {{-- Script untuk menjalankan efek Typewriter --}}
+{{-- Script untuk menjalankan efek Typewriter & Counter --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Teks sesuai instruksi Tugas 1 poin 3b
+            
+            // --- 1. EFEK TYPEWRITER ---
             const teksTujuan = "Universitas Kristen Petra adalah tempat di mana pemimpin-pemimpin sosial global dibentuk dan ditempa berlandaskan nilai-nilai kristiani. Kami mengundangmu untuk menimba ilmu di universitas yang peduli dan global, untuk belajar di bawah staf pengajar yang teruji dan bergabung dengan para mahasiswa dengan visi yang sama—membawa dampak bagi dunia.";
             
             const wadahTeks = document.getElementById("teks-typewriter");
             const kursor = document.getElementById("kursor");
             
             let i = 0;
-            const kecepatan = 12; 
+            const kecepatan = 25; 
 
             function ketikTeks() {
                 if (i < teksTujuan.length) {
@@ -158,13 +164,54 @@
                     i++;
                     setTimeout(ketikTeks, kecepatan);
                 } else {
-                    // Opsional: hilangkan kursor beberapa detik setelah selesai mengetik
                     setTimeout(() => kursor.style.opacity = '0', 2000);
                 }
             }
-
-            // Mulai ngetik setelah jeda 1 detik agar animasi stabilo selesai dulu
             setTimeout(ketikTeks, 1000);
+
+
+            // --- 2. EFEK COUNT-UP STATISTIK ---
+            const counters = document.querySelectorAll('.counter-angka');
+            const statsSection = document.getElementById('stats-section');
+            let animasiBerjalan = false;
+
+            function mulaiAnimasiAngka() {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const suffix = counter.getAttribute('data-suffix');
+                    
+                    // Kecepatan animasi (semakin besar pembaginya, semakin pelan)
+                    const increment = target / 100; 
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            // toLocaleString('id-ID') memberikan format ribuan dengan titik
+                            counter.innerText = Math.ceil(current).toLocaleString('id-ID') + suffix;
+                            requestAnimationFrame(updateCounter); // Loop agar mulus
+                        } else {
+                            // Pastikan angka terakhir pas di target
+                            counter.innerText = target.toLocaleString('id-ID') + suffix;
+                        }
+                    };
+                    updateCounter();
+                });
+            }
+
+            // Gunakan IntersectionObserver untuk mendeteksi saat section terlihat di layar
+            const observer = new IntersectionObserver((entries) => {
+                // Jika section terlihat dan belum pernah dianimasikan
+                if (entries[0].isIntersecting && !animasiBerjalan) {
+                    mulaiAnimasiAngka();
+                    animasiBerjalan = true; // Set true agar tidak mengulang saat discroll naik-turun
+                }
+            }, { threshold: 0.5 }); // Mulai saat 50% elemen masuk layar
+
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+
         });
     </script>
 
