@@ -5,23 +5,9 @@
 @section('content')
 
     {{-- Hero Image — full width --}}
-    <div class="w-full relative overflow-hidden" style="max-height: 600px;">
-        <img src="{{ asset('images/home.jpg') }}"
-             alt="Universitas Kristen Petra"
-             class="w-full object-cover object-center"
-             style="height: 600px;">
-        {{-- Overlay gradient --}}
-        <div class="absolute inset-0 bg-gradient-to-t from-petra-dark/60 via-transparent to-transparent"></div>
-        {{-- Hero text on image --}}
-        <div class="absolute bottom-10 left-0 right-0 text-center px-4">
-            <span class="inline-block bg-petra-gold text-petra-dark font-semibold text-xs px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
-                #1 Best Private University in East Java
-            </span>
-            <h1 class="font-display text-3xl md:text-5xl font-bold text-white drop-shadow-lg">
-                Stand with <em>The Bright</em>
-            </h1>
-        </div>
-    </div>
+    <img src="{{ asset('images/home.jpg') }}"
+         alt="Universitas Kristen Petra"
+         class="w-full block">
 
     {{-- About Section --}}
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

@@ -61,29 +61,27 @@
 <body class="bg-white text-gray-800 antialiased">
 
     {{-- Navigation Bar --}}
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20" style="box-shadow: 0 4px 30px rgba(0,0,0,0.1);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
 
                 {{-- Logo --}}
-                <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                    <div class="w-12 h-12 bg-petra-blue rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                        <span class="text-white font-display font-bold text-lg">UK</span>
-                    </div>
-                    <div class="hidden sm:block">
-                        <p class="font-display font-bold text-petra-blue text-base leading-tight">PETRA</p>
-                        <p class="font-display text-gray-500 text-xs leading-tight tracking-widest uppercase">Christian University</p>
-                    </div>
-                </a>
+<a href="{{ route('home') }}" class="flex items-center gap-3 group">
+    <img src="{{ asset('images/logo-petra.png') }}"
+         alt="Logo UK Petra"
+         class="h-12 w-auto">
+    <div class="hidden sm:block">
+    </div>
+</a>
 
                 {{-- Desktop Menu --}}
                 <div class="hidden md:flex items-center gap-10">
                     <a href="{{ route('home') }}"
-                       class="nav-link font-semibold text-sm tracking-wide text-gray-700 hover:text-petra-blue transition-colors {{ request()->routeIs('home') ? 'active text-petra-gold' : '' }}">
+                       class="nav-link font-semibold text-sm tracking-wide text-white hover:text-petra-gold transition-colors {{ request()->routeIs('home') ? 'active text-petra-gold' : '' }}">
                         Home
                     </a>
                     <a href="{{ route('facility') }}"
-                       class="nav-link font-semibold text-sm tracking-wide text-gray-700 hover:text-petra-blue transition-colors {{ request()->routeIs('facility') ? 'active text-petra-gold' : '' }}">
+                       class="nav-link font-semibold text-sm tracking-wide text-white hover:text-petra-gold transition-colors {{ request()->routeIs('facility') ? 'active text-petra-gold' : '' }}">
                         Facility
                     </a>
                     <a href="https://petra.ac.id" target="_blank"
@@ -93,7 +91,7 @@
                 </div>
 
                 {{-- Mobile Hamburger --}}
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-white hover:bg-white/20 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
@@ -121,7 +119,7 @@
     </nav>
 
     {{-- Page Content --}}
-    <main class="pt-20">
+    <main>
         @yield('content')
     </main>
 
