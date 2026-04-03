@@ -8,10 +8,11 @@
     {{-- Tailwind CSS CDN --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
-    {{-- Google Fonts --}}
+{{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    {{-- Mengganti Playfair Display dengan Poppins yang lebih modern --}}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -26,7 +27,7 @@
                         }
                     },
                     fontFamily: {
-                        display: ['"Playfair Display"', 'serif'],
+                        display: ['"Poppins"', 'sans-serif'],
                         sans:    ['"Plus Jakarta Sans"', 'sans-serif'],
                     }
                 }
@@ -128,15 +129,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-petra-blue rounded-full flex items-center justify-center">
-                            <span class="text-white font-display font-bold">UK</span>
-                        </div>
-                        <div>
-                            <p class="font-display font-bold text-white text-sm">PETRA</p>
-                            <p class="text-gray-400 text-xs tracking-widest uppercase">Christian University</p>
-                        </div>
-                    </div>
+                   <div class="flex items-center gap-3 mb-4">
+    {{-- Memanggil gambar logo yang sama dengan navbar --}}
+    <img src="{{ asset('images/logo-pcu.png') }}" alt="Logo UK Petra" class="h-12 w-auto bg-white/90 p-1 rounded-md">
+    
+    {{-- Catatan: Jika gambar logo-petra.png kamu sudah ada tulisannya, 
+         kamu bisa menghapus div teks di bawah ini agar tidak dobel --}}
+    <div>
+        <p class="font-display font-bold text-white text-sm">PETRA</p>
+        <p class="text-gray-400 text-xs tracking-widest uppercase">Christian University</p>
+    </div>
+</div>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         #1 Best Private University in East Java<br>
                         QS World University Rankings 2026

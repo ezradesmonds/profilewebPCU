@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- Page Header --}}
-    <section class="bg-petra-dark py-20 px-4">
+    <section class="bg-petra-dark pt-36 pb-20 px-4">
         <div class="max-w-5xl mx-auto text-center">
             <span class="inline-block bg-petra-gold/20 text-petra-gold font-semibold text-xs px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
                 Fasilitas Kampus

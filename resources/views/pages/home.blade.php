@@ -4,10 +4,41 @@
 
 @section('content')
 
-    {{-- Hero Image — full width --}}
+    {{-- Custom CSS untuk Efek Stabilo dan Typewriter --}}
+    <style>
+        /* Efek Stabilo pada teks */
+        .efek-stabilo {
+            /* Menggunakan warna petra-gold (#F5A623) dengan transparansi */
+            background-image: linear-gradient(transparent 60%, rgba(245, 166, 35, 0.6) 60%);
+            background-size: 0% 100%;
+            background-repeat: no-repeat;
+            animation: highlight 1.2s ease-out forwards;
+            animation-delay: 0.5s; 
+        }
+        @keyframes highlight {
+            to { background-size: 100% 100%; }
+        }
+
+        /* Efek Kursor Berkedip */
+        .kursor-ketik {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: #003DA5; /* Warna petra-blue */
+            vertical-align: middle;
+            margin-left: 3px;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+    
+{{-- Hero Image — full width --}}
     <img src="{{ asset('images/home.jpg') }}"
          alt="Universitas Kristen Petra"
-         class="w-full block">
+         class="w-full block mt-20"> 
+         {{-- mt-20 ditambahkan agar posisinya turun ke bawah navbar --}}
 
     {{-- About Section --}}
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -39,12 +70,17 @@
                 <div class="inline-block bg-petra-gold/20 text-petra-blue font-semibold text-xs px-3 py-1 rounded-full uppercase tracking-widest mb-4">
                     Tentang Kami
                 </div>
+                
+                {{-- Penambahan efek stabilo di kata Pemimpin --}}
                 <h2 class="font-display text-3xl md:text-4xl font-bold text-petra-dark leading-tight mb-6">
-                    Membentuk <span class="text-petra-blue">Pemimpin</span><br>Global Masa Depan
+                    Membentuk <span class="text-petra-blue efek-stabilo px-1">Pemimpin</span><br>Global Masa Depan
                 </h2>
-                <p class="text-gray-600 leading-relaxed text-base md:text-lg">
-                    Universitas Kristen Petra adalah tempat di mana pemimpin-pemimpin sosial global dibentuk dan ditempa berlandaskan nilai-nilai kristiani. Kami mengundangmu untuk menimba ilmu di universitas yang peduli dan global, untuk belajar di bawah staf pengajar yang teruji dan bergabung dengan para mahasiswa dengan visi yang sama—membawa dampak bagi dunia.
+                
+                {{-- Penambahan wadah untuk efek Typewriter --}}
+                <p class="text-gray-600 leading-relaxed text-base md:text-lg min-h-[160px]">
+                    <span id="teks-typewriter"></span><span id="kursor" class="kursor-ketik"></span>
                 </p>
+                
                 <div class="mt-8 flex flex-wrap gap-4">
                     <a href="{{ route('facility') }}"
                        class="bg-petra-blue text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-blue-800 transition-colors shadow-md hover:shadow-lg">
@@ -103,5 +139,33 @@
             </div>
         </div>
     </section>
+
+    {{-- Script untuk menjalankan efek Typewriter --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Teks sesuai instruksi Tugas 1 poin 3b
+            const teksTujuan = "Universitas Kristen Petra adalah tempat di mana pemimpin-pemimpin sosial global dibentuk dan ditempa berlandaskan nilai-nilai kristiani. Kami mengundangmu untuk menimba ilmu di universitas yang peduli dan global, untuk belajar di bawah staf pengajar yang teruji dan bergabung dengan para mahasiswa dengan visi yang sama—membawa dampak bagi dunia.";
+            
+            const wadahTeks = document.getElementById("teks-typewriter");
+            const kursor = document.getElementById("kursor");
+            
+            let i = 0;
+            const kecepatan = 12; 
+
+            function ketikTeks() {
+                if (i < teksTujuan.length) {
+                    wadahTeks.innerHTML += teksTujuan.charAt(i);
+                    i++;
+                    setTimeout(ketikTeks, kecepatan);
+                } else {
+                    // Opsional: hilangkan kursor beberapa detik setelah selesai mengetik
+                    setTimeout(() => kursor.style.opacity = '0', 2000);
+                }
+            }
+
+            // Mulai ngetik setelah jeda 1 detik agar animasi stabilo selesai dulu
+            setTimeout(ketikTeks, 1000);
+        });
+    </script>
 
 @endsection
