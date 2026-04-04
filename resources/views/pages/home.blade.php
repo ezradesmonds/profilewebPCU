@@ -53,6 +53,7 @@
 {{-- Hero Image — full width --}}
     <div class="bg-[#0a1628] pt-20">
         <img src="{{ asset('images/home.jpg') }}"
+            id="hero-img"
              alt="Universitas Kristen Petra"
              class="w-full block">
     </div>
@@ -202,7 +203,7 @@
                     const target = +counter.getAttribute('data-target');
                     const suffix = counter.getAttribute('data-suffix');
                     
-                    const increment = target / 100; 
+                    const increment = target / 300; 
                     let current = 0;
                     
                     const updateCounter = () => {

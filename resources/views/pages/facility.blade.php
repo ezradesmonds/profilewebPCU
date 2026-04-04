@@ -27,14 +27,22 @@
         </svg>
     </div>
 
-    {{-- Facilities List --}}
+{{-- Facilities List --}}
     <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
 
         @forelse($fasilitas as $index => $item)
 
-            @php $isOdd = ($index + 1) % 2 !== 0; @endphp
+            @php 
+                // Ganjil: Item ke-1, 3, 5, dst. Genap: Item ke-2, 4, 6, dst.
+                $isOdd = ($index + 1) % 2 !== 0; 
+            @endphp
 
-            <div class="flex flex-col {{ $isOdd ? 'md:flex-row' : 'md:flex-row-reverse' }} gap-10 items-center">
+            {{-- 
+                REVISI: 
+                Jika Ganjil ($isOdd), gunakan 'md:flex-row-reverse' agar gambar pindah ke KANAN.
+                Jika Genap, gunakan 'md:flex-row' agar gambar di KIRI.
+            --}}
+            <div class="flex flex-col {{ $isOdd ? 'md:flex-row-reverse' : 'md:flex-row' }} gap-10 items-center efek-reveal">
 
                 {{-- Image --}}
                 <div class="w-full md:w-1/2 relative">
@@ -44,12 +52,13 @@
                              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                              onerror="this.onerror=null; this.src=''; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br from-petra-blue/10 to-petra-gold/10 flex items-center justify-center\'><svg class=\'w-16 h-16 text-petra-blue/30\' fill=\'currentColor\' viewBox=\'0 0 24 24\'><path d=\'M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z\'/></svg></div>';">
                     </div>
-                    {{-- Decorative accent --}}
-                    <div class="absolute -z-10 {{ $isOdd ? '-bottom-4 -right-4' : '-bottom-4 -left-4' }} w-32 h-32 rounded-3xl bg-petra-gold/20"></div>
+                    {{-- REVISI: Aksen emas juga ditukar posisinya biar seimbang --}}
+                    <div class="absolute -z-10 {{ $isOdd ? '-bottom-4 -left-4' : '-bottom-4 -right-4' }} w-32 h-32 rounded-3xl bg-petra-gold/20"></div>
                 </div>
 
                 {{-- Content --}}
-                <div class="w-full md:w-1/2 {{ $isOdd ? 'md:pl-4' : 'md:pr-4' }}">
+                {{-- REVISI: Padding teks ditukar agar ada jarak yang pas dengan gambar --}}
+                <div class="w-full md:w-1/2 {{ $isOdd ? 'md:pr-4' : 'md:pl-4' }}">
                     <div class="inline-flex items-center gap-2 bg-petra-blue/10 text-petra-blue text-xs font-semibold px-3 py-1 rounded-full mb-4">
                         <span class="w-1.5 h-1.5 rounded-full bg-petra-blue"></span>
                         Fasilitas #{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}

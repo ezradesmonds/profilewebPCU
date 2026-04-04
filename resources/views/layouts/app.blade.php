@@ -36,6 +36,18 @@
     </script>
 
     <style>
+        /* Kelas awal saat elemen belum masuk layar */
+        .efek-reveal {
+              opacity: 0;
+              transform: translateY(30px);
+              transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+/* Kelas saat elemen sudah masuk layar */
+        .efek-reveal.terlihat {
+              opacity: 1;
+             transform: translateY(0);
+        }
+
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .nav-link {
             position: relative;
@@ -172,5 +184,22 @@
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => menu.classList.toggle('hidden'));
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const reveals = document.querySelectorAll(".efek-reveal");
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("terlihat");
+                    observer.unobserve(entry.target); // Animasi cuma 1x jalan biar ga pusing
+                }
+            });
+        }, { threshold: 0.15 }); // Muncul saat 15% elemen masuk layar
+
+        reveals.forEach(reveal => revealObserver.observe(reveal));
+    });
+    </script>
+
 </body>
 </html>
