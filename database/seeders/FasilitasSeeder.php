@@ -32,7 +32,7 @@ class FasilitasSeeder extends Seeder
                 'nama'      => 'Petra Career Center',
                 'foto'      => 'petracareercenter.png', 
                 'keterangan'=> 'Petra Career Center ada untuk mempersiapkan Petranesian sebelum terjun ke dunia kerja melalui program-program onsite dan daring yang asik, seperti webinar, workshop, seminar, dan kamp. Pengenalan potensi karier untuk Petranesian juga diberikan melalui psikotes dan konsultasi karier. Tidak hanya itu, lulusan juga dihubungkan dengan perusahaan-perusahaan pencari tenaga kerja.',
-                'url'       => 'https://career.petra.ac.id',
+                'url'       => 'https://alumni.petra.ac.id',
             ],
             [
                 'nama'      => 'BAKA',
@@ -55,7 +55,12 @@ class FasilitasSeeder extends Seeder
             [
                 'nama'      => 'Pusat Kerohanian (PUSROH)',
                 'foto'      => 'pusatkerohanian.png', 
-                'keterangan'=> 'Pusat Kerohanian bertugas untuk memberikan layanan di bidang kerohanian kepada mahasiswa, dosen, dan tenaga kependidikan untuk mengembangkan wawasan dunia Kristen (Christian worldview) serta mendorong penerapan nilai-nilai kristiani (Christian values) sehingga dapat menolong pertumbuhan rohani yang diwujudkan dalam perilaku kristiani.',
+                'keterangan'=> 'Pusat Kerohanian bertugas untuk memberikan layanan di bidang kerohanian kepada mahasiswa, dosen, dan tenaga kependidikan untuk mengembangkan wawasan dunia Kristen (Christian worldview) serta mendorong penerapan nilai-nilai kristiani (Christian values) sehingga dapat menolong pertumbuhan rohani yang diwujudkan dalam perilaku kristiani. 
+                
+                Untuk mengetahui daftar program yang dapat kamu ikuti, hubungi Pusroh di:
+P: (031) 298 3197
+E: pusroh@petra.ac.id
+Senin-Jumat, 7.30-15.30',
                 'url'       => 'https://petra.ac.id/facilities',
             ],
         ];

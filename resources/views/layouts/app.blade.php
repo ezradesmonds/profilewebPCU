@@ -85,7 +85,7 @@
                        class="nav-link font-semibold text-sm tracking-wide text-white hover:text-petra-gold transition-colors {{ request()->routeIs('facility') ? 'active text-petra-gold' : '' }}">
                         Facility
                     </a>
-                    <a href="https://petra.ac.id" target="_blank"
+                    <a href="https://registration.petra.ac.id/" target="_blank"
                        class="bg-petra-blue text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-800 transition-colors shadow-sm">
                         Daftar Sekarang
                     </a>

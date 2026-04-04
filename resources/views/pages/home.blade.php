@@ -4,11 +4,10 @@
 
 @section('content')
 
-    {{-- Custom CSS untuk Efek Stabilo dan Typewriter --}}
+    {{-- Custom CSS untuk Efek Stabilo, Typewriter, dan Circle Animations --}}
     <style>
-        /* Efek Stabilo pada teks */
+        /* --- 1. Efek Stabilo pada teks --- */
         .efek-stabilo {
-            /* Menggunakan warna petra-gold (#F5A623) dengan transparansi */
             background-image: linear-gradient(transparent 60%, rgba(245, 166, 35, 0.6) 60%);
             background-size: 0% 100%;
             background-repeat: no-repeat;
@@ -19,12 +18,12 @@
             to { background-size: 100% 100%; }
         }
 
-        /* Efek Kursor Berkedip */
+        /* --- 2. Efek Kursor Berkedip (Typewriter) --- */
         .kursor-ketik {
             display: inline-block;
             width: 2px;
             height: 1.1em;
-            background-color: #003DA5; /* Warna petra-blue */
+            background-color: #003DA5; 
             vertical-align: middle;
             margin-left: 3px;
             animation: blink 1s step-end infinite;
@@ -32,34 +31,60 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+
+        /* --- 3. Animasi Lingkaran Dekoratif --- */
+        @keyframes floatAccentGroup {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .efek-floating {
+            animation: floatAccentGroup 5s ease-in-out infinite;
+        }
+
+        @keyframes rotateGoldRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .efek-border-rotate {
+            animation: rotateGoldRing 12s linear infinite;
+        }
     </style>
-    
+
 {{-- Hero Image — full width --}}
-    <img src="{{ asset('images/home.jpg') }}"
-         alt="Universitas Kristen Petra"
-         class="w-full block mt-20"> 
-         {{-- mt-20 ditambahkan agar posisinya turun ke bawah navbar --}}
+    <div class="bg-[#0a1628] pt-20">
+        <img src="{{ asset('images/home.jpg') }}"
+             alt="Universitas Kristen Petra"
+             class="w-full block">
+    </div>
 
     {{-- About Section --}}
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="grid md:grid-cols-5 gap-12 items-center">
 
-            {{-- Decorative side accent --}}
+            {{-- Decorative side accent — DIPERBAIKI --}}
             <div class="hidden md:flex md:col-span-2 flex-col items-center justify-center">
-                <div class="relative">
-                    <div class="w-56 h-56 rounded-full border-4 border-petra-gold/30 flex items-center justify-center">
-                        <div class="w-44 h-44 rounded-full bg-petra-blue/10 flex items-center justify-center">
+                {{-- Seluruh cluster mengambang bersama --}}
+                <div class="relative efek-floating"> 
+                    
+                    {{-- Wadah utama lingkaran --}}
+                    <div class="relative w-56 h-56 flex items-center justify-center">
+                        {{-- HANYA cincin luar yang berputar (menggunakan absolute agar teks di dalam tidak ikut berputar) --}}
+                        <div class="absolute w-full h-full rounded-full border-4 border-petra-gold/20 border-t-petra-gold efek-border-rotate"></div>
+                        
+                        {{-- Wadah teks statis di dalam --}}
+                        <div class="w-44 h-44 rounded-full bg-petra-blue/10 flex items-center justify-center relative z-10">
                             <div class="text-center">
                                 <p class="font-display font-bold text-petra-blue text-4xl">1961</p>
                                 <p class="text-xs text-gray-500 tracking-widest uppercase mt-1">Didirikan</p>
                             </div>
                         </div>
                     </div>
+
                     {{-- Stats badges --}}
-                    <div class="absolute -top-2 -right-6 bg-petra-blue text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+                    <div class="absolute -top-2 -right-6 bg-petra-blue text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg z-20">
                         #20 Indonesia
                     </div>
-                    <div class="absolute -bottom-2 -left-6 bg-petra-gold text-petra-dark px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+                    <div class="absolute -bottom-2 -left-6 bg-petra-gold text-petra-dark px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg z-20">
                         7.000+ Mahasiswa
                     </div>
                 </div>
@@ -71,12 +96,10 @@
                     Tentang Kami
                 </div>
                 
-                {{-- Penambahan efek stabilo di kata Pemimpin --}}
                 <h2 class="font-display text-3xl md:text-4xl font-bold text-petra-dark leading-tight mb-6">
                     Membentuk <span class="text-petra-blue efek-stabilo px-1">Pemimpin</span><br>Global Masa Depan
                 </h2>
                 
-                {{-- Penambahan wadah untuk efek Typewriter --}}
                 <p class="text-gray-600 leading-relaxed text-base md:text-lg min-h-[160px]">
                     <span id="teks-typewriter"></span><span id="kursor" class="kursor-ketik"></span>
                 </p>
@@ -95,7 +118,7 @@
         </div>
     </section>
 
-{{-- Stats Section --}}
+    {{-- Stats Section --}}
     <section id="stats-section" class="bg-petra-dark py-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-center text-petra-gold font-semibold text-xs uppercase tracking-widest mb-10">Petra dalam Angka</p>
@@ -107,7 +130,6 @@
                     [52860, '', 'Alumni Global'],
                 ] as $stat)
                 <div>
-                    {{-- Tambahkan class counter-angka dan atribut data-target --}}
                     <p class="font-display font-bold text-3xl md:text-4xl text-white counter-angka" 
                        data-target="{{ $stat[0] }}" 
                        data-suffix="{{ $stat[1] }}">
@@ -145,32 +167,32 @@
         </div>
     </section>
 
-{{-- Script untuk menjalankan efek Typewriter & Counter --}}
+    {{-- Script untuk menjalankan efek Typewriter & Counter --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // --- 1. EFEK TYPEWRITER ---
+            // --- EFEK TYPEWRITER ---
             const teksTujuan = "Universitas Kristen Petra adalah tempat di mana pemimpin-pemimpin sosial global dibentuk dan ditempa berlandaskan nilai-nilai kristiani. Kami mengundangmu untuk menimba ilmu di universitas yang peduli dan global, untuk belajar di bawah staf pengajar yang teruji dan bergabung dengan para mahasiswa dengan visi yang sama—membawa dampak bagi dunia.";
             
             const wadahTeks = document.getElementById("teks-typewriter");
             const kursor = document.getElementById("kursor");
             
             let i = 0;
-            const kecepatan = 25; 
+            const kecepatan = 12; 
 
             function ketikTeks() {
-                if (i < teksTujuan.length) {
+                // BUG FIXED: wadahTeks sekarang pakai 'w' kecil
+                if (wadahTeks && i < teksTujuan.length) {
                     wadahTeks.innerHTML += teksTujuan.charAt(i);
                     i++;
                     setTimeout(ketikTeks, kecepatan);
-                } else {
+                } else if (kursor) {
                     setTimeout(() => kursor.style.opacity = '0', 2000);
                 }
             }
             setTimeout(ketikTeks, 1000);
 
-
-            // --- 2. EFEK COUNT-UP STATISTIK ---
+            // --- EFEK COUNT-UP STATISTIK ---
             const counters = document.querySelectorAll('.counter-angka');
             const statsSection = document.getElementById('stats-section');
             let animasiBerjalan = false;
@@ -180,18 +202,15 @@
                     const target = +counter.getAttribute('data-target');
                     const suffix = counter.getAttribute('data-suffix');
                     
-                    // Kecepatan animasi (semakin besar pembaginya, semakin pelan)
                     const increment = target / 100; 
                     let current = 0;
                     
                     const updateCounter = () => {
                         current += increment;
                         if (current < target) {
-                            // toLocaleString('id-ID') memberikan format ribuan dengan titik
                             counter.innerText = Math.ceil(current).toLocaleString('id-ID') + suffix;
-                            requestAnimationFrame(updateCounter); // Loop agar mulus
+                            requestAnimationFrame(updateCounter); 
                         } else {
-                            // Pastikan angka terakhir pas di target
                             counter.innerText = target.toLocaleString('id-ID') + suffix;
                         }
                     };
@@ -199,14 +218,12 @@
                 });
             }
 
-            // Gunakan IntersectionObserver untuk mendeteksi saat section terlihat di layar
             const observer = new IntersectionObserver((entries) => {
-                // Jika section terlihat dan belum pernah dianimasikan
                 if (entries[0].isIntersecting && !animasiBerjalan) {
                     mulaiAnimasiAngka();
-                    animasiBerjalan = true; // Set true agar tidak mengulang saat discroll naik-turun
+                    animasiBerjalan = true; 
                 }
-            }, { threshold: 0.5 }); // Mulai saat 50% elemen masuk layar
+            }, { threshold: 0.5 }); 
 
             if (statsSection) {
                 observer.observe(statsSection);
