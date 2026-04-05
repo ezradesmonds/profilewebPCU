@@ -48,15 +48,65 @@
         .efek-border-rotate {
             animation: rotateGoldRing 12s linear infinite;
         }
+
+        /* --- 4. Efek Shimmer (Cahaya Lewat) di Hero --- */
+        .hero-shimmer {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            animation: shimmerSwipe 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            pointer-events: none; /* Agar tidak menghalangi klik */
+            z-index: 10;
+        }
+        @keyframes shimmerSwipe {
+            0% { left: -150%; }
+            50% { left: 200%; }
+            100% { left: 200%; } /* Jeda diam sebentar sebelum ngulang */
+        }
+
+        /* --- 5. Efek Slow Zoom (Ken Burns) --- */
+        #hero-img {
+            animation: slowZoom 20s alternate infinite ease-in-out;
+        }
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+    
     </style>
 
-{{-- Hero Image — full width --}}
-    <div class="bg-[#0a1628] pt-20">
-        <img src="{{ asset('images/home.jpg') }}"
-            id="hero-img"
-             alt="Universitas Kristen Petra"
-             class="w-full block">
+{{-- ══════════════════════════════════
+     1. FOTO FULL WIDTH (FULL SCREEN)
+══════════════════════════════════ --}}
+{{-- Tambahkan relative dan overflow-hidden agar shimmer tidak bocor --}}
+<section class="hero-wrap w-full h-screen select-none bg-black relative overflow-hidden">
+    
+    {{-- Menggunakan tag picture untuk responsive image --}}
+    <picture style="width: 100%; height: 100%; display: block;">
+        {{-- Gambar untuk mobile (lebar maksimal 759px) --}}
+        <source media="(max-width: 759px)" srcset="{{ asset('images/home-mobile.png') }}">
+        
+        {{-- Gambar default / desktop --}}
+        <img id="hero-img"
+             src="{{ asset('images/home.jpg') }}"
+             alt="Kampus Universitas Kristen Petra"
+             style="width:100%; height:100%; display:block; object-fit:cover; object-position:center; will-change:transform; opacity:0.9;">
+    </picture>
+    
+    <div class="hero-shimmer"></div>
+
+    {{-- scroll hint --}}
+    <div style="position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;z-index:20;">
+        <span style="color:rgba(255,255,255,0.8);font-size:11px;letter-spacing:3px;text-transform:uppercase;text-shadow:0 1px 5px rgba(0,0,0,0.8);">Scroll</span>
+        <svg class="scroll-dot" style="width:20px;height:20px;color:rgba(255,255,255,0.8);filter:drop-shadow(0 1px 4px rgba(0,0,0,0.8));" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
     </div>
+</section>
 
     {{-- About Section --}}
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

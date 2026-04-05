@@ -143,7 +143,7 @@
                 <div>
                    <div class="flex items-center gap-3 mb-4">
     {{-- Memanggil gambar logo yang sama dengan navbar --}}
-    <img src="{{ asset('images/logo-pcu.png') }}" alt="Logo UK Petra" class="h-12 w-auto bg-white/90 p-1 rounded-md">
+    <img src="{{ asset('images/logo-pcu.png') }}" alt="Logo UK Petra" class="h-12 w-auto  p-1 rounded-md">
     
     {{-- Catatan: Jika gambar logo-petra.png kamu sudah ada tulisannya, 
          kamu bisa menghapus div teks di bawah ini agar tidak dobel --}}

@@ -55,12 +55,7 @@ class FasilitasSeeder extends Seeder
             [
                 'nama'      => 'Pusat Kerohanian (PUSROH)',
                 'foto'      => 'pusatkerohanian.png', 
-                'keterangan'=> 'Pusat Kerohanian bertugas untuk memberikan layanan di bidang kerohanian kepada mahasiswa, dosen, dan tenaga kependidikan untuk mengembangkan wawasan dunia Kristen (Christian worldview) serta mendorong penerapan nilai-nilai kristiani (Christian values) sehingga dapat menolong pertumbuhan rohani yang diwujudkan dalam perilaku kristiani. 
-                
-                Untuk mengetahui daftar program yang dapat kamu ikuti, hubungi Pusroh di:
-P: (031) 298 3197
-E: pusroh@petra.ac.id
-Senin-Jumat, 7.30-15.30',
+                'keterangan'=> 'Pusat Kerohanian bertugas untuk memberikan layanan di bidang kerohanian kepada mahasiswa, dosen, dan tenaga kependidikan untuk mengembangkan wawasan dunia Kristen (Christian worldview) serta mendorong penerapan nilai-nilai kristiani (Christian values) sehingga dapat menolong pertumbuhan rohani yang diwujudkan dalam perilaku kristiani.',
                 'url'       => 'https://petra.ac.id/facilities',
             ],
         ];
